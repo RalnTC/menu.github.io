@@ -1,59 +1,186 @@
-function quitarTildes(str) {
-  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-const hFrutas = document.querySelector(".titulo-frutas");
-const hVerduras = document.querySelector(".titulo-verduras");
-const contenedorFrutas = document.querySelector(".menudefrutas");
-const contenedorVerduras = document.querySelector(".menudeverduras");
-
-document.getElementById("btn-buscar").addEventListener("click", function() {
-  const busqueda = quitarTildes(document.getElementById("input-busqueda").value.trim().toLowerCase());
-  let encontrado = false;
-
-  // Ocultar títulos
-  hFrutas.style.display = "none";
-  hVerduras.style.display = "none";
-
-  // Ocultar contenedores normales
-  contenedorFrutas.style.display = "none";
-  contenedorVerduras.style.display = "none";
-
-  // Buscar fruta o verdura
-  document.querySelectorAll(".fruta, .verdura").forEach(e => {
-    const nombre = quitarTildes(e.textContent.trim().toLowerCase());
-    if(nombre === busqueda) {
-      e.style.display = "block";
-      e.style.position = "absolute";
-      e.style.top = "50%";
-      e.style.left = "50%";
-      e.style.transform = "translate(-50%, -50%)";
-      e.style.textAlign = "center";
-      encontrado = true;
-    } else {
-      e.style.display = "none";
-    }
-  });
-});
-
-document.getElementById("input-busqueda").addEventListener("input", function() {
-  if(this.value.trim() === "") {
-    // Restaurar títulos
-    hFrutas.style.display = "block";
-    hVerduras.style.display = "block";
-
-    // Restaurar contenedores
-    contenedorFrutas.style.display = "grid";
-    contenedorVerduras.style.display = "grid";
-
-    // Restaurar todas las frutas y verduras
-    document.querySelectorAll(".fruta, .verdura").forEach(e => {
-      e.style.display = "block";
-      e.style.position = "";
-      e.style.top = "";
-      e.style.left = "";
-      e.style.transform = "";
-      e.style.textAlign = "";
-    });
-  }
-});
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Menu de frutas</title>
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+	<h1>Buscador de frutas</h1>
+	<div class="buscador">
+		<input type="text" id="input-busqueda" placeholder="Buscar...">
+		<button id="btn-buscar">Buscar</button>
+	</div>
+	<h1 class="titulo-de-frutas">Frutas</h1>
+	<div class="menudefrutas">
+		<div class="fruta">
+			<h3>Manzana</h3>
+			<img src="https://images.vexels.com/media/users/3/182371/isolated/preview/2f8c7e9f42c7781c3846b435475f92af-plano-de-fruta-de-manzana.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Banana</h3>
+			<img src="https://images.vexels.com/media/users/3/212331/isolated/preview/9797717cb12980b66129c8634049df59-banana-hand-drawn-fruit.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Naranja</h3>
+			<img src="https://images.vexels.com/media/users/3/143191/isolated/preview/925871db899c05172adae868b7ca93c0-icono-de-color-naranja.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Pera</h3>
+			<img src="https://images.vexels.com/media/users/3/185258/isolated/preview/9a795ff4189d53ba2a05baf670567899-fruta-de-pera-plana.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Uva</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/7149/7149234.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Piña</h3>
+			<img src="https://images.vexels.com/media/users/3/230459/isolated/preview/b466e264b6ca0dbf6c17da98c6e2c0fe-pina-de-fruta-plana.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Fresa</h3>
+			<img src="https://images.vexels.com/media/users/3/260761/isolated/lists/216b790338cec3e817f23122cbb3636c-fruta-simple-plana-de-fresa.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Sandia</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/928/928192.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Mango</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/765/765599.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Durazno</h3>
+			<img src="https://images.vexels.com/media/users/3/306627/isolated/preview/96d8b455c4123a97126cc99b03b0dc62-durazno-dulce.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Cereza</h3>
+			<img src="https://images.vexels.com/media/users/3/306641/isolated/preview/cb4eea482c75b94cd8f3d67285ee577f-cerezas-dulces-y-organicas.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Kiwi</h3>
+			<img src="https://images.vexels.com/media/users/3/185238/isolated/preview/706aa4a506730e6e9111fd03a92e41a9-fruta-de-kiwi-plana.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Mandarina</h3>
+			<img src="https://images.vexels.com/media/users/3/185300/isolated/preview/0b98ed6f16211dcebd4cf65c965dceeb-tangerine-fruit-flat.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Limón</h3>
+			<img src="https://images.vexels.com/media/users/3/143176/isolated/preview/4dc46e4cbd05cfe9aacfb15a1020364a-icono-de-color-limon.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Papaya</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/5721/5721962.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Mora</h3>
+			<img src="https://images.vexels.com/media/users/3/185077/isolated/preview/652720dd5b0e91f29c22d192445d54de-fruta-de-mora-plana.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Granada</h3>
+			<img src="https://images.vexels.com/media/users/3/184950/isolated/preview/06345d2ac74c5738ee508cc79504e2f2-ilustracion-de-comida-de-fruta-de-granada.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Maracuyá</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/2431/2431668.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Ciruela</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/4055/4055242.png" width="200px">
+		</div>
+		<div class="fruta">
+			<h3>Melón</h3>
+			<img src="https://images.vexels.com/media/users/3/190567/isolated/preview/8e2de491c1207c12dbc063ad1d867d22-melon-detailed-fruit.png" width="200px">
+		</div>
+	</div>	
+	<h1 class="titulo-de-verduras">Verduras</h1>
+	<div class="menudeverduras">
+		<div class="verdura">
+			<h3>Tomate</h3>
+			<img src="https://images.vexels.com/media/users/3/185310/isolated/preview/06689dffb5be50454cfaf0cfb6f069ed-plano-de-vegetales-de-tomate.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Zanahoria</h3>
+			<img src="https://images.vexels.com/media/users/3/185086/isolated/preview/9ee80e0783f4860f28134a7f4b4524f3-plano-vegetal-de-zanahoria.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Lechuga</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/3823/3823382.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Espinaca</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/8886/8886224.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Brócoli</h3>
+			<img src="https://images.vexels.com/media/users/3/143075/isolated/preview/67338ec18bf7513bd0687a6e82504d52-icono-de-color-de-brocoli.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Pepino</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/7315/7315766.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Pimiento rojo</h3>
+			<img src="https://images.vexels.com/media/users/3/270751/isolated/preview/3963f82fab86800d8c13962f7858d56d-icono-detallado-de-pimiento.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Pimiento verde</h3>
+			<img src="https://images.vexels.com/media/users/3/185085/isolated/preview/3e0a54b722777aea9b6084caf1da6673-pimiento-vegetal-plano.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Coliflor</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/8611/8611498.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Calabacin</h3>
+			<img src="https://images.vexels.com/media/users/3/185320/isolated/preview/7ecd555f89e36a0b2e1840fb3bceb636-vegetal-de-calabacin-plano.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Berenjena</h3>
+			<img src="https://images.vexels.com/media/users/3/185209/isolated/preview/bd6651c891df748919c50d18539d8cf3-berenjena-vegetal-plana.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Apio</h3>
+			<img src="https://images.vexels.com/media/users/3/185089/isolated/preview/f09e664679061e0a88fc844739ee12ed-apio-vegetal-plano.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Cebolla</h3>
+			<img src="https://images.vexels.com/media/users/3/212674/isolated/preview/90c91ff540dc11495b77b78530fe87a6-cebolla-beige-dibujada-a-mano.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Ajo</h3>
+			<img src="https://images.vexels.com/media/users/3/312857/isolated/preview/fe944e02f395e5352c7332f537c5c311-forrajeo-de-ajo.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Rabano</h3>
+			<img src="https://images.vexels.com/media/users/3/185279/isolated/preview/afe95dee012a39cc3c557c4a58a92674-rabano-vegetal-plano.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Repollo</h3>
+			<img src="https://images.vexels.com/media/users/3/185081/isolated/preview/3c983f7a9b14e9da2dfd178e756dbd40-planta-de-repollo-vegetal.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Maíz</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/3090/3090354.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Champiñon</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/6120/6120752.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Esparrago</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/5582/5582532.png" width="200px">
+		</div>
+		<div class="verdura">
+			<h3>Alcachofa</h3>
+			<img src="https://cdn-icons-png.flaticon.com/512/4977/4977333.png" width="200px">
+		</div>
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>
