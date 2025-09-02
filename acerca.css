@@ -4,29 +4,36 @@ function quitarTildes(str) {
 
 const hFrutas = document.querySelector(".titulo-frutas");
 const hVerduras = document.querySelector(".titulo-verduras");
+const contenedorFrutas = document.querySelector(".menudefrutas");
+const contenedorVerduras = document.querySelector(".menudeverduras");
 
 document.getElementById("btn-buscar").addEventListener("click", function() {
   const busqueda = quitarTildes(document.getElementById("input-busqueda").value.trim().toLowerCase());
-
   let encontrado = false;
 
+  // Ocultar títulos
+  hFrutas.style.display = "none";
+  hVerduras.style.display = "none";
+
+  // Ocultar contenedores normales
+  contenedorFrutas.style.display = "none";
+  contenedorVerduras.style.display = "none";
+
+  // Buscar fruta o verdura
   document.querySelectorAll(".fruta, .verdura").forEach(e => {
     const nombre = quitarTildes(e.textContent.trim().toLowerCase());
     if(nombre === busqueda) {
       e.style.display = "block";
-      e.style.margin = "50px auto";  // centra el elemento
+      e.style.position = "absolute";
+      e.style.top = "50%";
+      e.style.left = "50%";
+      e.style.transform = "translate(-50%, -50%)";
       e.style.textAlign = "center";
       encontrado = true;
     } else {
       e.style.display = "none";
     }
   });
-
-  // Ocultar títulos si se encontró algo
-  if(encontrado) {
-    hFrutas.style.display = "none";
-    hVerduras.style.display = "none";
-  }
 });
 
 document.getElementById("input-busqueda").addEventListener("input", function() {
@@ -35,11 +42,18 @@ document.getElementById("input-busqueda").addEventListener("input", function() {
     hFrutas.style.display = "block";
     hVerduras.style.display = "block";
 
-    // Mostrar todas las frutas y verduras
+    // Restaurar contenedores
+    contenedorFrutas.style.display = "grid";
+    contenedorVerduras.style.display = "grid";
+
+    // Restaurar todas las frutas y verduras
     document.querySelectorAll(".fruta, .verdura").forEach(e => {
       e.style.display = "block";
-      e.style.margin = "";   // quitar el centrado
-      e.style.textAlign = ""; 
+      e.style.position = "";
+      e.style.top = "";
+      e.style.left = "";
+      e.style.transform = "";
+      e.style.textAlign = "";
     });
   }
 });
